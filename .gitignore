@@ -1,0 +1,4 @@
+relatorio/**/*.log
+relatorio/**/*.fls
+relatorio/**/*.fdb_latexmk
+relatorio/**/*.aux
