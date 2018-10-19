@@ -17,7 +17,7 @@ function current_out(code::ConvolutionalCode, extended_mems::Array{Int64})
 end
 
 function encode(code::ConvolutionalCode, info_bits::Array{Int64})
-	out_sequence = Array{Array{Int64}}(undef, length(info_bits))
+	out_sequence = Array{Array{Int64, 1}, 1}(undef, length(info_bits))
 	mems = Array{Int64}(undef, code.quant_mem + 1)
 	fill!(mems, 0)
 
