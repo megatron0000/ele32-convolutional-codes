@@ -1,4 +1,4 @@
-module decode 
+module decoder
 
 using conv_code
 using utils
@@ -6,8 +6,8 @@ using transitions
 
 export decode
 
-struct TreeNode
-	parent::TreeNode
+mutable struct TreeNode
+	parent::Union{TreeNode, Nothing}
 	level::Int64 # Nível da raiz deve ser 1
 	cost::Int64 # Custo acumulado no algoritmo de Viterbi
 	info_bit::Int64 # Bit de informação associado ao nó
@@ -23,12 +23,12 @@ function decode(code::ConvolutionalCode, in_sequence::Array{Array{Int64, 1}, 1})
 
 	# O nível da raiz é 1
 	current_leaves::Array{TreeNode} = [
-		TreeNode(nothing, 0, 0, -1) for i in range(2^code.quant_mem)
+		TreeNode(nothing, 0, 0, -1) for i in range(1; length=2^code.quant_mem)
 	]
 	current_leaves[1].level = 1
 
 	next_leaves::Array{TreeNode} = [
-		TreeNode(nothing, 0, 0, -1) for i in range(2^code.quant_mem)
+		TreeNode(nothing, 0, 0, -1) for i in range(1; length=2^code.quant_mem)
 	]
 
 	# No índice level, calcular as folhas do nível level+1
@@ -44,11 +44,11 @@ function decode(code::ConvolutionalCode, in_sequence::Array{Array{Int64, 1}, 1})
 				continue
 			end
 
-			for transition=transitions(code, curr_leaf_index)
+			for transition=transition_list(code, curr_leaf_index)
 				child = TreeNode(
 					curr_leaf_node,
 					level+1, 
-					curr_leaf_node.cost + transition.output' * curr_seq,
+					curr_leaf_node.cost + sum(abs.(transition.output - curr_seq)),
 					transition.in_bit
 				)
 				# Se visto pela primeira vez, ou mais barato que o já

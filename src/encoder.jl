@@ -1,4 +1,4 @@
-module encode
+module encoder
 
 using conv_code
 
@@ -14,11 +14,11 @@ end
 
 function current_out(code::ConvolutionalCode, extended_mems::Array{Int64})
 	return map(
-		indices -> reduce(
+		indices -> mod(reduce(
 			(previous, index) -> previous + extended_mems[index] ,
 			indices;
 			init=0
-		), 
+		), 2), 
 		code.outs
 	)
 end
