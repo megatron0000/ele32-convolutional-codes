@@ -1,3 +1,7 @@
+module transitions
+
+export transitions
+
 struct Transition
 	in_bit::Int64
 	output::Array{Int64}
@@ -15,4 +19,6 @@ O 'origin_state' correspondendo ao estado com:
 	- todas as memórias=1 é 2^(code.quant_mem)
 =#
 function transitions(code::ConvolutionalCode, origin_state::Int64)
+end
+
 end

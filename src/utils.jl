@@ -1,3 +1,7 @@
+module utils
+
+export @swap!
+
 macro swap!(a::Symbol,b::Symbol)
 	blk = quote
 		if typeof($(esc(a))) != typeof($(esc(b)))
@@ -9,4 +13,6 @@ macro swap!(a::Symbol,b::Symbol)
 		end
 	end
 	return blk
+end
+
 end

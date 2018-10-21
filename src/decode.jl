@@ -1,6 +1,10 @@
-include("conv_code.jl")
-include("utils.jl")
-include("transitions.jl")
+module decode 
+
+using conv_code
+using utils
+using transitions
+
+export decode
 
 struct TreeNode
 	parent::TreeNode
@@ -62,7 +66,7 @@ function decode(code::ConvolutionalCode, in_sequence::Array{Array{Int64, 1}, 1})
 
 	# Selecionar a folha mais barata do último nível
 	best_leaf = current_leaves[1]
-	for leaf:current_leaves
+	for leaf=current_leaves
 		if leaf.level != length(in_sequence)+1
 			continue
 		end
@@ -80,5 +84,6 @@ function decode(code::ConvolutionalCode, in_sequence::Array{Array{Int64, 1}, 1})
 	end
 
 	return decoded_bits
+end
 
 end

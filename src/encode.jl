@@ -1,3 +1,10 @@
+module encode
+
+using conv_code
+
+export current_out
+export encode
+
 function shift_mems!(new_bit::Int64, extended_mems::Array{Int64})
 	for k=length(extended_mems):-1:2
 		extended_mems[k] = extended_mems[k-1]
@@ -27,4 +34,6 @@ function encode(code::ConvolutionalCode, info_bits::Array{Int64})
 	end
 
 	return out_sequence
+end
+
 end
