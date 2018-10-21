@@ -1,23 +1,6 @@
 include("conv_code.jl")
-
-struct Transition
-	in_bit::Int64
-	output::Array{Int64}
-	next_state::Int64
-end
-
-#=
-Esta função deve retornar algo do tipo Array{Transition},
-em que o Transition.in_bit é um bit de entrada, o Transition.output 
-é a saída gerada pelo tal bit de entrada e Transition.next_state é 
-o próximo estado (notação binária)
-
-O 'origin_state' correspondendo ao estado com:
-	- todas as memórias nulas é 1
-	- todas as memórias=1 é 2^(code.quant_mem)
-=#
-function transitions(code::ConvolutionalCode, origin_state::Int64)
-end
+include("utils.jl")
+include("transitions.jl")
 
 struct TreeNode
 	parent::TreeNode
@@ -30,19 +13,6 @@ struct TreeNode
 		cost,
 		info_bit
 	)
-end
-
-macro swap!(a::Symbol,b::Symbol)
-	blk = quote
-		if typeof($(esc(a))) != typeof($(esc(b)))
-			throw(ArgumentError("Arrays of different type"))
-		else
-			c = $(esc(a))
-			$(esc(a)) = $(esc(b))
-			$(esc(b)) = c
-		end
-	end
-	return blk
 end
 
 function decode(code::ConvolutionalCode, in_sequence::Array{Array{Int64, 1}, 1})
