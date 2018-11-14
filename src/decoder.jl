@@ -3,23 +3,12 @@ module decoder
 using conv_code
 using utils
 using transitions
+using code_structs
+using cost_functions
 
 export decode
 
-mutable struct TreeNode
-	parent::Union{TreeNode, Nothing}
-	level::Int64 # Nível da raiz deve ser 1
-	cost::Int64 # Custo acumulado no algoritmo de Viterbi
-	info_bit::Int64 # Bit de informação associado ao nó
-	TreeNode(parent, level, cost, info_bit) = new(
-		parent,
-		level,
-		cost,
-		info_bit
-	)
-end
-
-function decode(code::ConvolutionalCode, in_sequence::Array{Array{Int64, 1}, 1})
+function decode(p::Float64, code::ConvolutionalCode, in_sequence::Array{Array{Float64, 1}, 1})
 
 	# O nível da raiz é 1
 	current_leaves::Array{TreeNode} = [
@@ -48,7 +37,7 @@ function decode(code::ConvolutionalCode, in_sequence::Array{Array{Int64, 1}, 1})
 				child = TreeNode(
 					curr_leaf_node,
 					level+1, 
-					curr_leaf_node.cost + sum(abs.(transition.output - curr_seq)),
+					euclidean_cost(p, curr_seq, curr_leaf_node, transition),
 					transition.in_bit
 				)
 				# Se visto pela primeira vez, ou mais barato que o já

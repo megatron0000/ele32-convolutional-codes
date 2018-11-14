@@ -3,18 +3,9 @@ module transitions
 using conv_code
 using encoder
 using utils
-
+using code_structs
 
 export transition_list
-
-struct Transition
-	in_bit::Int64
-	output::Array{Int64}
-	next_state::Int64
-	Transition(in_bit, output, next_state) = new(
-		in_bit, output, next_state
-	)
-end
 
 #=
 Esta função deve retornar algo do tipo Array{Transition},
