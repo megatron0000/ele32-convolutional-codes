@@ -19,7 +19,7 @@ error1 = Array{Float64,1}(undef, 11)
 error2 = Array{Float64,1}(undef, 11)
 error3 = Array{Float64,1}(undef, 11)
 
-info_bits = Array{Int64,1}(undef, 1000)
+info_bits = Array{Int64,1}(undef, 1000000)
 fill!(info_bits, 0)
 
 # for indice=1:length(PP)
