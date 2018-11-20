@@ -15,7 +15,7 @@ function exact_cost(p::Float64, curr_seq::Array{Float64,1}, node::TreeNode, tran
 
 	difference = hamming_cost(p, curr_seq, node, transition)
 
-	return difference*log(p) + (node.level*length(transition.output) - difference)*log(1-p)
+	return - difference*log(p) - (node.level*length(transition.output) - difference)*log(1-p)
 end
 
 function euclidean_cost(p::Float64, curr_seq::Array{Float64,1}, node::TreeNode, transition::Transition)

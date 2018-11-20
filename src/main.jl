@@ -11,37 +11,37 @@ code1 = ConvolutionalCode(3, [[1, 3, 4], [1, 2, 4], [1, 2, 3, 4]])
 code2 = ConvolutionalCode(4, [[1, 3, 5], [1, 2, 4, 5], [1, 2, 3, 4, 5]])
 code3 = ConvolutionalCode(6, [[1, 4, 5, 6, 7], [1, 3, 5, 6 , 7], [1, 2, 4, 5, 7]])
 
-# error1 = Array{Float64,1}(undef, 30)
-# error2 = Array{Float64,1}(undef, 30)
-# error3 = Array{Float64,1}(undef, 30)
+error1 = Array{Float64,1}(undef, 30)
+error2 = Array{Float64,1}(undef, 30)
+error3 = Array{Float64,1}(undef, 30)
 
-error1 = Array{Float64,1}(undef, 11)
-error2 = Array{Float64,1}(undef, 11)
-error3 = Array{Float64,1}(undef, 11)
+# error1 = Array{Float64,1}(undef, 11)
+# error2 = Array{Float64,1}(undef, 11)
+# error3 = Array{Float64,1}(undef, 11)
 
 info_bits = Array{Int64,1}(undef, 1000000)
 fill!(info_bits, 0)
 
-# for indice=1:length(PP)
-# 	p = PP[indice]
-
-# 	print("code1")
-# 	decoded_bits1 = decode(p, code1, convert(Array{Array{Float64, 1}, 1}, BSC(p, encode(code1, info_bits))))
-# 	print("code2")
-# 	decoded_bits2 = decode(p, code2, convert(Array{Array{Float64, 1}, 1}, BSC(p, encode(code2, info_bits))))
-# 	print("code3")
-# 	decoded_bits3 = decode(p, code3, convert(Array{Array{Float64, 1}, 1}, BSC(p, encode(code3, info_bits))))
-
-for indice=1:length(NN)
-	p = 1.0
-	N0 = NN[indice]
+for indice=1:length(PP)
+	p = PP[indice]
 
 	print("code1")
-	decoded_bits1 = decode(p, code1, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encode(code1, info_bits)))))
+	decoded_bits1 = decode(p, code1, convert(Array{Array{Float64, 1}, 1}, BSC(p, encode(code1, info_bits))))
 	print("code2")
-	decoded_bits2 = decode(p, code2, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encode(code2, info_bits)))))
+	decoded_bits2 = decode(p, code2, convert(Array{Array{Float64, 1}, 1}, BSC(p, encode(code2, info_bits))))
 	print("code3")
-	decoded_bits3 = decode(p, code3, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encode(code3, info_bits)))))
+	decoded_bits3 = decode(p, code3, convert(Array{Array{Float64, 1}, 1}, BSC(p, encode(code3, info_bits))))
+
+# for indice=1:length(NN)
+# 	p = 1.0
+# 	N0 = NN[indice]
+
+# 	print("code1")
+# 	decoded_bits1 = decode(p, code1, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encode(code1, info_bits)))))
+# 	print("code2")
+# 	decoded_bits2 = decode(p, code2, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encode(code2, info_bits)))))
+# 	print("code3")
+# 	decoded_bits3 = decode(p, code3, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encode(code3, info_bits)))))
 
 	error1[indice] = sum(decoded_bits1)
 	error2[indice] = sum(decoded_bits2)
