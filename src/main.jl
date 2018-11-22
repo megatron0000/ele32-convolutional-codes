@@ -54,19 +54,19 @@ for indice=1:length(PP)
 	error3[indice] = sum(abs.(decoded_bits3 - info_bits))
 end
 
-open("./temp/error1.txt", "w") do io
+open("/Users/Eduardo/Documents/GitHub/ele32-convolutional-codes/src/error1.txt", "w") do io
 	for i=1:length(error1)
 		println(io, error1[i])
 	end
 end
 
-open("./temp/error2.txt", "w") do io
+open("/Users/Eduardo/Documents/GitHub/ele32-convolutional-codes/src/error2.txt", "w") do io
 	for i=1:length(error2)
 		println(io, error2[i])
 	end
 end
 
-open("./temp/error3.txt", "w") do io
+open("/Users/Eduardo/Documents/GitHub/ele32-convolutional-codes/src/error3.txt", "w") do io
 	for i=1:length(error3)
 		println(io, error3[i])
 	end
