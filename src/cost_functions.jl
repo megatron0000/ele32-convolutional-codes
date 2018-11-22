@@ -12,9 +12,8 @@ function hamming_cost(p::Float64, curr_seq::Array{Float64,1}, node::TreeNode, tr
 end
 
 function exact_cost(p::Float64, curr_seq::Array{Float64,1}, node::TreeNode, transition::Transition)
-
-	difference = hamming_cost(p, curr_seq, node, transition)
-
+	difference = sum(abs.(transition.output - curr_seq))
+	return node.cost - (difference * log(p) + (length(transition.output) - difference) * log(1-p))
 	return - difference*log(p) - (node.level*length(transition.output) - difference)*log(1-p)
 end
 
