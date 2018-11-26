@@ -5,7 +5,6 @@ using encoder
 using decoder
 using channels
 
-#= PP = [0.5, 0.4, 0.3, 0.2, 0.1, 0.05, 0.04, 0.03, 0.02, 0.01, 0.005, 0.004, 0.003, 0.002, 0.001, 0.0005, 0.0004, 0.0003, 0.0002, 0.0001, 0.00005, 0.00004, 0.00003, 0.00002, 0.00001, 0.000005, 0.000004, 0.000003, 0.000002, 0.000001] =#
 NN = [3.0, 3.0*10^(-0.1), 3.0*10^(-0.2), 3.0*10^(-0.3), 3.0*10^(-0.4), 3.0*10^(-0.5), 3.0*10^(-0.6), 3.0*10^(-0.7), 3.0*10^(-0.8), 3.0*10^(-0.9), 3.0*10^(-1.0)]
 # Mapeamento p = Q(Sqrt(2 Eb / N0))
 PP = [0.252493, 0.200655, 0.145348, 0.0917303, 0.0470073, 0.0175075, 0.00397663, 0.000417013, 0.0000129746, 5.93386*10^(-8)  , 1.3084*10^(-11)]
@@ -17,12 +16,6 @@ error1 = Array{Float64,1}(undef, length(NN))
 error2 = Array{Float64,1}(undef, length(NN))
 error3 = Array{Float64,1}(undef, length(NN))
 
-# error1 = Array{Float64,1}(undef, 11)
-# error2 = Array{Float64,1}(undef, 11)
-# error3 = Array{Float64,1}(undef, 11)
-
-#= info_bits = Array{Int64,1}(undef, 1000000)
-fill!(info_bits, 0) =# 
 info_bits = rand([0,1], 10000)
 encoded_bits1 = encode(code1, info_bits)
 encoded_bits2 = encode(code2, info_bits)
@@ -39,15 +32,15 @@ for indice=1:length(PP)
 	decoded_bits3 = decode(p, code3, convert(Array{Array{Float64, 1}, 1}, BSC(p, encoded_bits3)))
 
 # for indice=1:length(NN)
-# 	p = 1.0
+# 	p = 1.0 # qualquer. Não usado pelo euclidean_cost
 # 	N0 = NN[indice]
 
 # 	print("code1")
-# 	decoded_bits1 = decode(p, code1, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encode(code1, info_bits)))))
+# 	decoded_bits1 = decode(p, code1, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encoded_bits1))))
 # 	print("code2")
-# 	decoded_bits2 = decode(p, code2, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encode(code2, info_bits)))))
+# 	decoded_bits2 = decode(p, code2, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encoded_bits2))))
 # 	print("code3")
-# 	decoded_bits3 = decode(p, code3, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encode(code3, info_bits)))))
+# 	decoded_bits3 = decode(p, code3, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encoded_bits3))))
 
 	error1[indice] = sum(abs.(decoded_bits1 - info_bits))
 	error2[indice] = sum(abs.(decoded_bits2 - info_bits))
