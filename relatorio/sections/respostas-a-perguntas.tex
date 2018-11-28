@@ -1,0 +1,32 @@
+\section{Respostas a perguntas (rascunho)}
+
+\subsection{Do primeiro roteiro (lab3)}
+
+\subsubsection{Quais foram as maiores dificuldades em implementar o codificador convolucional?}
+
+Não houve dificuldade. Modelando o codificador como uma máquina de estado, a implementação foi direta.
+
+\subsubsection{Quanto tempo a sua solução demora para codificar cada bit de informação? Faça uma média.}
+
+Analisando cada um dos 3 códigos convolucionais pedidos no roteiro, observou-se que o primeiro demora 330ns para codificar cada bit de informação; o segundo, 365ns; o terceiro, 443ns.
+
+\subsubsection{Quais foram as maiores dificuldades em implementar o decodificador convolucional?}
+
+Dado que a decodificação tem complexidade exponencial de espaço na quantidade de "memórias" do código convolucional, o maior entrave à implementação do algoritmo foi vislumbrar uma estrutura de dados não-ingênua que permitisse codificar toda a informação necessária sem uso de memória excessiva (por exemplo, liberando espaço de memória ao descartar possíveis caminhos na treliça em meio ao algoritmo).
+
+\subsubsection{Como a probabilidade de erro de transmissão foi estimada? Qual é o seu valor? Como ela se
+compara com o valor de p escolhido? Como ela muda com m?}
+
+Gráficos necessários
+
+\subsubsection{Qual é o tamanho final do seu executável?}
+
+O programa foi codificado em linguagem Julia, a qual usa uma técnica de compilação "just in time" para converter o código a instruções de uma LLVM ("low level virtual machine") e o executar. Apesar de existirem desenvolvedores contribuindo para tornar possível a compilação prévia (ou seja, tornar possível a geração de um executável "standalone"), o código deste laboratório não pôde ser convertido num executável puro. Ainda assim, pode-se dizer, sobre os arquivos produzidos na linguagem Julia, que nenhum supera 2Kbytes de tamanho e, juntos, não superam 20Kbytes.
+
+\subsubsection{Quanto tempo a sua solução demora para decodificar cada bit? Faça uma média.}
+
+Os decodificadores de cada código convolucional trabalhado demoram, em média, $30 \mu s$, $60 \mu s$ e $300 \mu s$ para decodificar 1 bit de informação.
+
+\subsection{Do segundo roteiro (lab4)}
+
+Não há uma pergunta específica. A comparação entre os códigos é exibida num gráfico.
