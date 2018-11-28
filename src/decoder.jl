@@ -37,7 +37,7 @@ function decode(p::Float64, code::ConvolutionalCode, in_sequence::Array{Array{Fl
 				child = TreeNode(
 					curr_leaf_node,
 					level+1, 
-					exact_cost(p, curr_seq, curr_leaf_node, transition),
+					euclidean_cost(p, curr_seq, curr_leaf_node, transition),
 					transition.in_bit
 				)
 				# Se visto pela primeira vez, ou mais barato que o já

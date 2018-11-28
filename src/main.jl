@@ -16,31 +16,31 @@ error1 = Array{Float64,1}(undef, length(NN))
 error2 = Array{Float64,1}(undef, length(NN))
 error3 = Array{Float64,1}(undef, length(NN))
 
-info_bits = rand([0,1], 10000)
+info_bits = rand([0,1], 1000000)
 encoded_bits1 = encode(code1, info_bits)
 encoded_bits2 = encode(code2, info_bits)
 encoded_bits3 = encode(code3, info_bits)
 
-for indice=1:length(PP)
-	p = PP[indice]
-
-	print("code1")
-	decoded_bits1 = decode(p, code1, convert(Array{Array{Float64, 1}, 1}, BSC(p, encoded_bits1)))
-	print("code2")
-	decoded_bits2 = decode(p, code2, convert(Array{Array{Float64, 1}, 1}, BSC(p, encoded_bits2)))
-	print("code3")
-	decoded_bits3 = decode(p, code3, convert(Array{Array{Float64, 1}, 1}, BSC(p, encoded_bits3)))
-
-# for indice=1:length(NN)
-# 	p = 1.0 # qualquer. Não usado pelo euclidean_cost
-# 	N0 = NN[indice]
+# for indice=1:length(PP)
+# 	p = PP[indice]
 
 # 	print("code1")
-# 	decoded_bits1 = decode(p, code1, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encoded_bits1))))
+# 	decoded_bits1 = decode(p, code1, convert(Array{Array{Float64, 1}, 1}, BSC(p, encoded_bits1)))
 # 	print("code2")
-# 	decoded_bits2 = decode(p, code2, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encoded_bits2))))
+# 	decoded_bits2 = decode(p, code2, convert(Array{Array{Float64, 1}, 1}, BSC(p, encoded_bits2)))
 # 	print("code3")
-# 	decoded_bits3 = decode(p, code3, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encoded_bits3))))
+# 	decoded_bits3 = decode(p, code3, convert(Array{Array{Float64, 1}, 1}, BSC(p, encoded_bits3)))
+
+for indice=1:length(NN)
+	p = 1.0 # qualquer. Não usado pelo euclidean_cost
+	N0 = NN[indice]
+
+	print("code1")
+	decoded_bits1 = decode(p, code1, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encoded_bits1))))
+	print("code2")
+	decoded_bits2 = decode(p, code2, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encoded_bits2))))
+	print("code3")
+	decoded_bits3 = decode(p, code3, AWGN(N0, convert(Array{Array{Float64, 1}, 1}, BPSK.(encoded_bits3))))
 
 	error1[indice] = sum(abs.(decoded_bits1 - info_bits))
 	error2[indice] = sum(abs.(decoded_bits2 - info_bits))
