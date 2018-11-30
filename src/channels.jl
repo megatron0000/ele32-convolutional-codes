@@ -55,7 +55,7 @@ function BPSK(bits::Array{Int64, 1})
 		if bits[indice] == 0
             bpsk_bits[indice] = -1
         else
-            bpsk_bits[indice] = 0
+            bpsk_bits[indice] = 1
 		end
     end
     
