@@ -1,0 +1,38 @@
+\section{Introdução}
+
+\subsection{Códigos Convolucionais}
+
+Um código convolucional é um tipo de código corretor de erro que processa uma sequência de bits. Ele é composto por um codificador convolucional e um decodificador.
+
+
+\subsection{Codificador Convolucional}
+
+Um codificador convolucional pode ser visto como uma máquina que a cada instante processa $k$ bits de entrada e gera $n > k$ bits de saída e que possui memória, de forma que os bits a serem gerados no próximo instante dependem do estado (memória) atual do codificador.
+Uma forma de descrever o código do codificador convolucional é através da descrição polinomial, a qual é descrita com mais detalhes em [2] e [3]. A matriz geradora $G(D)$ é a matriz formada pelos polinômios geradores, em que cada um deles é responsável pela geração de um bit codificado. A relação entre entrada e saída é dada pelo produto do polinômio de entrada $u(D)$ pela matriz geradora:
+
+\begin{equation}
+V(D)=u(D)G(D)
+\end{equation}
+
+A saída unidimensional é formada pela interpolação dos termos das saídas de $V(D)$:
+
+\begin{equation}
+v(D)= \sum_{n}^{i=1} v_{i}(D^{n})D^{i-1}
+\end{equation}
+
+Outra descrição possível é através do diagrama de estados com um codificador recursivo, que não será abordada no relatório. 
+
+\subsection{Decodificação}
+Para a decodificação, utiliza-se o algoritmo de Viterbi. O algoritmo de Viterbi usa a treliça do código para realizar a decodificação de um código convolucional. O algoritmo armazena métricas de percurso (custo) para tomar a decisão sobre qual sequência foi transmitida. A métrica do percurso é obtida através da soma das métricas dos ramos que, concatenados, formam o percurso.
+
+Para os métodos implementados utilizou-se três métricas:
+
+$\bullet$ Realizando a transmissão através de um canal BSC, utilizou-se a distância de Hamming entre o que foi recebido e os rótulos binários de saída dos ramos. A distância de Hamming entre os dois vetores binários com o mesmo comprimento é o número de posições em que estes dois vetores diferem de valor.
+
+$\bullet$ Realizando a transmissão através de um canal BSC, utilizou-se a probabilidade de cada ramo ter sido transmitido dado o valor recebido naquele instante.
+
+$\bullet$ Realizando a transmissão através de um canal AWGN, utilizou-se a distância Euclidiana quadrática entre o símbolo recebido e os símbolos associados aos ramos de saída.
+
+A cada instante, o número de percursos possíveis cresce exponencialmente. Se, por exemplo, o codificador tiver $k$ entradas, $n$ saídas e $m$ memórias, há $2^{kt}$ sequências possíveis do instante $0$ até o instante $t$. Por outro lado, somente um pequeno conjunto de sequências são as mais prováveis. O algoritmo de Viterbi aproveita-se deste fato para reduzir a complexidade de decodificação. Em um dado instante, há vários percursos que levam ao mesmo estado $\sigma_{i}^{t}$. Dentre os vários possíveis, um deles será mais provável do que os outros. Logo, se o percurso mais provável passa pelo estado $\sigma_{i}$ no instante $t$, o caminho que levou até este estado deve ser o mais provável. Assim, em cada instante, é necessário
+armazenar, pra cada estado, somente o caminho mais provável de chegar até ele. Isto é, precisamos armazenar $2m$ caminhos, o que é uma redução de complexidade se comparado com o número de sequências possíveis ($2^{kt}$).
+

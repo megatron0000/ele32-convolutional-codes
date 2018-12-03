@@ -1,0 +1,27 @@
+\section{Implementação}
+
+Todas as implementações foram feitas utilizando a linguagem de programação Julia, projetada para atender os requisitos da computação de alto desempenho numérico e científico.
+
+\subsection{Codificador Convolucional}
+
+A implementação do codificador convolucional foi feita com base na interpretação da máquina de estados descrita anteriormente. A partir do polinômio gerador o código recebe quais memórias, e também o bit de entrada, fazem parte do bit de saída. O funcionamento da máquina de estados se dá a partir de \textit{shifts} nas memórias, em que as memórias representam o estado atual, retornando os bits de saída e recebendo um novo bit de entrada.
+
+\subsection{Canais BSC e AWGN}
+
+A implementação dos canais consiste em simular a transmissão dos bits já codificados, ou seja, inserir ruídos. Para o canal BSC, o código recebe os bits já codificados e para cada bit gera um número aleatório entre 0 e 1. Para uma probabilidade de erro de bit $p$, muda o bit quando o número gerado for menor que $p$.
+
+Para o canal AWGN, primeiro os bits codificados são remapeados para uma modulação BPSK (os bits 0 são substituídos por bits -1). Em seguida, é somado em cada bit um ruído obtido ao gerar um número aleatório tendo como distribuição uma distribuição normal com média 0 e variância $\sqrt{N_{0}/2}$.
+
+\subsection{Decodificador}
+
+A implementação do decodificador foi feita utilizando uma árvore como estrutura de dados para a realização do algoritmo de Viterbi:
+
+1. Inicie todos os estados com custo igual a zero. Caso o estado inicial seja obrigatoriamente um estado em particular (por exemplo estado nulo), somente este terá custo zero; os outros terão custo inicial infinito.
+
+2. Dado o símbolo recebido, calcule o custo de cada uma das transições possíveis no instante atual.
+
+3. Para cada estado futuro, calcule o custo de todos os percursos que chegam ao estado somando o custo do estado anterior com o custo do ramo que causa a transição entre estados. O caminho sobrevivente para um estado futuro é aquele com menor custo. Este custo torna-se também o custo do estado.
+
+4. Enquanto houver símbolos a serem processados, retorne ao passo 2.
+
+5. Escolha o estado final que tem o menor custo e o caminho que leva a ele, obedecendo a restrições sobre o estado final, se houver.
