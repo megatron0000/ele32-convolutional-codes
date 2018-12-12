@@ -1,10 +1,10 @@
 \section{Implementação}
 
-Todas as implementações foram feitas utilizando a linguagem de programação Julia, projetada para atender os requisitos da computação de alto desempenho numérico e científico.
+Todas as implementações foram feitas utilizando a linguagem de programação Julia, projetada para atender aos requisitos da computação científica de alto desempenho.
 
 \subsection{Codificador Convolucional}
 
-A implementação do codificador convolucional foi feita com base na interpretação da máquina de estados descrita anteriormente. A partir do polinômio gerador o código recebe quais memórias, e também o bit de entrada, fazem parte do bit de saída. O funcionamento da máquina de estados se dá a partir de \textit{shifts} nas memórias, em que as memórias representam o estado atual, retornando os bits de saída e recebendo um novo bit de entrada.
+A implementação do codificador convolucional foi feita com base na interpretação da máquina de estados descrita anteriormente. A partir do polinômio gerador, o código recebe quais memórias, e qual bit de entrada, fazem parte do bit de saída. O funcionamento da máquina de estados se dá a partir de \textit{shifts} nas memórias, em que as memórias representam o estado atual, retornando os bits de saída e recebendo um novo bit de entrada.
 
 \subsection{Canais BSC e AWGN}
 
@@ -25,3 +25,5 @@ A implementação do decodificador foi feita utilizando uma árvore como estrutu
 4. Enquanto houver símbolos a serem processados, retorne ao passo 2.
 
 5. Escolha o estado final que tem o menor custo e o caminho que leva a ele, obedecendo a restrições sobre o estado final, se houver.
+
+Para cada código convolucional submetido a testes, Viterbi foi implementado segundo cada uma das 3 métricas já descritas na seção \ref{secao:decodificacao}

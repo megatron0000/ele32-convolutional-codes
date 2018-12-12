@@ -17,22 +17,21 @@ V(D)=u(D)G(D)
 A saída unidimensional é formada pela interpolação dos termos das saídas de $V(D)$:
 
 \begin{equation}
-v(D)= \sum_{n}^{i=1} v_{i}(D^{n})D^{i-1}
+v(D)= \sum_{i=1}^{n} V_{i}(D^{n})D^{i-1}
 \end{equation}
 
-Outra descrição possível é através do diagrama de estados com um codificador recursivo, que não será abordada no relatório. 
+Outra descrição possível é através do diagrama de estados com um codificador recursivo, não abordada no relatório. 
 
-\subsection{Decodificação}
+\subsection{Decodificação \label{secao:decodificacao}}
 Para a decodificação, utiliza-se o algoritmo de Viterbi. O algoritmo de Viterbi usa a treliça do código para realizar a decodificação de um código convolucional. O algoritmo armazena métricas de percurso (custo) para tomar a decisão sobre qual sequência foi transmitida. A métrica do percurso é obtida através da soma das métricas dos ramos que, concatenados, formam o percurso.
 
-Para os métodos implementados utilizou-se três métricas:
+Para os métodos implementados utilizaram-se três métricas:
 
-$\bullet$ Realizando a transmissão através de um canal BSC, utilizou-se a distância de Hamming entre o que foi recebido e os rótulos binários de saída dos ramos. A distância de Hamming entre os dois vetores binários com o mesmo comprimento é o número de posições em que estes dois vetores diferem de valor.
+$\bullet$ \textit{Viterbi-hamming}: Realizando a transmissão através de um canal BSC, utilizou-se a distância de Hamming entre o que foi recebido e os rótulos binários de saída dos ramos. A distância de Hamming entre os dois vetores binários com o mesmo comprimento é o número de posições em que estes dois vetores diferem de valor.
 
-$\bullet$ Realizando a transmissão através de um canal BSC, utilizou-se a probabilidade de cada ramo ter sido transmitido dado o valor recebido naquele instante.
+$\bullet$ \textit{Viterbi-exact}: Realizando a transmissão através de um canal BSC, utilizou-se a probabilidade de cada ramo ter sido transmitido dado o valor recebido naquele instante.
 
-$\bullet$ Realizando a transmissão através de um canal AWGN, utilizou-se a distância Euclidiana quadrática entre o símbolo recebido e os símbolos associados aos ramos de saída.
+$\bullet$ \textit{Viterbi-euclidean}: Realizando a transmissão através de um canal AWGN, utilizou-se a distância Euclidiana quadrática entre o símbolo recebido e os símbolos associados aos ramos de saída.
 
-A cada instante, o número de percursos possíveis cresce exponencialmente. Se, por exemplo, o codificador tiver $k$ entradas, $n$ saídas e $m$ memórias, há $2^{kt}$ sequências possíveis do instante $0$ até o instante $t$. Por outro lado, somente um pequeno conjunto de sequências são as mais prováveis. O algoritmo de Viterbi aproveita-se deste fato para reduzir a complexidade de decodificação. Em um dado instante, há vários percursos que levam ao mesmo estado $\sigma_{i}^{t}$. Dentre os vários possíveis, um deles será mais provável do que os outros. Logo, se o percurso mais provável passa pelo estado $\sigma_{i}$ no instante $t$, o caminho que levou até este estado deve ser o mais provável. Assim, em cada instante, é necessário
-armazenar, pra cada estado, somente o caminho mais provável de chegar até ele. Isto é, precisamos armazenar $2m$ caminhos, o que é uma redução de complexidade se comparado com o número de sequências possíveis ($2^{kt}$).
+A cada instante, o número de percursos possíveis cresce exponencialmente. Se, por exemplo, o codificador tiver $k$ entradas, $n$ saídas e $m$ memórias, há $2^{kmt}$ sequências possíveis do instante $0$ até o instante $t$. Por outro lado, somente um pequeno conjunto de sequências são as mais prováveis. O algoritmo de Viterbi aproveita-se deste fato para reduzir a complexidade de decodificação. Em um dado instante, há vários percursos que levam ao mesmo estado $\sigma_{i}^{t}$. Dentre os vários possíveis, um deles será mais provável do que os outros. Logo, se o percurso mais provável passa pelo estado $\sigma_{i}$ no instante $t$, o caminho que levou até este estado deve ser o mais provável. Assim, em cada instante, é necessário armazenar, para cada estado, somente o caminho mais provável de chegar até ele. Isto é, precisamos armazenar $2^m$ caminhos, o que é uma redução de complexidade se comparado com o número de sequências possíveis ($2^{kmt}$).
 

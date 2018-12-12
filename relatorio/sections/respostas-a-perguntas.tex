@@ -17,7 +17,7 @@ Dado que a decodificação tem complexidade exponencial de espaço na quantidade
 \subsubsection{Como a probabilidade de erro de transmissão foi estimada? Qual é o seu valor? Como ela se
 compara com o valor de p escolhido? Como ela muda com m?}
 
-A probabilidade de erro de transmissão foi estimada por meio da relação sinal ruído normalizada $(\frac{E_{i}}{N_{0}})$. Seu valor foi obtido pela equação $p(\frac{E_{b}}{N_{0}}) = Q(\sqrt{\frac{2E_{b}}{N_{0}}})$, que é a mesma para os dois canais utilizados nesse roteiro (BSC e AWGN), a qual compara a relação sinal ruído normalizada com seu valor de $p$. Convertendo a energia de bit transmitido $(E_{b})$ para a energia de bit de informação $(E_{i})$, tal que $E_{b} = \frac{E_{i}}{3}$, obtém-se a equação final utilizada $p(\frac{E_{i}}{N_{0}}) = Q(\sqrt{\frac{2E_{i}}{3N_{0}}})$. A partir do gráfico da Figura \ref{fig:Fig2M}, ao fixar-se um valor específico de $p$, obtém-se valores distintos de $(\frac{E_{i}}{N_{0}})$ para cada valor de $m$, de tal forma que, quanto maior for o valor de $m$, menor será o valor de $\frac{E_{i}}{N_{0}}$.  
+A probabilidade de erro de transmissão foi estimada por meio da relação sinal ruído normalizada $(\frac{E_{i}}{N_{0}})$. Seu valor foi obtido pela equação $p\left(\frac{E_{b}}{N_{0}}\right) = Q\left(\sqrt{\frac{2E_{b}}{N_{0}}}\right)$, a qual compara a relação sinal ruído normalizada com seu valor de $p$. Convertendo a energia de bit transmitido $(E_{b})$ para a energia de bit de informação $(E_{i})$, tal que $E_{b} = \frac{E_{i}}{3}$, obtém-se a equação final utilizada $p\left(\frac{E_{i}}{N_{0}}\right) = Q\left(\sqrt{\frac{2E_{i}}{3N_{0}}}\right)$. A partir do gráfico da Figura \ref{fig:Fig2M}, ao fixar-se um valor específico de $p$, obtêm-se valores distintos de $(\frac{E_{i}}{N_{0}})$ para cada valor de $m$, de tal forma que, quanto maior for o valor de $m$, menor será o valor de $\frac{E_{i}}{N_{0}}$.  
 
 \subsubsection{Qual é o tamanho final do seu executável?}
 
@@ -34,7 +34,7 @@ Os decodificadores de cada código convolucional trabalhado demoram, em média, 
 Para obter o valor da razão sinal ruído utiliza-se a equação de Shannon-Hartley.
 
 \begin{equation}
-C=B\log_{2}(1+\frac{E_{b}}{N_{0}})
+C=B\log_{2}\left(1+\frac{E_{b}}{N_{0}}\right)
 \end{equation}
 
 Convertendo a energia de bit transmitido $(E_{b})$ para a energia de bit de informação $(E_{i})$, tal que $E_{b} = \frac{E_{i}}{3}$, obtém-se a equação final utilizada.
@@ -48,7 +48,7 @@ A partir das taxas de cada código - $\frac{4}{7}$ para os códigos de bloco, $\
 \begin{table}[H]
 	\centering
 	\captionsetup{font=scriptsize}
-	\captionof{table}{Valores de $(\frac{E_{b}}{N_{0}})$ para probabilidade de erro tão baixa quanto se queira\label{table:snrvalues1}}
+	\captionof{table}{Valores de $\left(\frac{E_{i}}{N_{0}}\right)$ para probabilidade de erro tão baixa quanto se queira\label{table:snrvalues1}}
 	\begin{tabular}{c|c}
 		\textbf{Código} & \textbf{$E_{i}/N_{0} (dB)$} \\ \hline
 		\textbf{Códigos de bloco} & 5.59 \\
@@ -65,7 +65,7 @@ Observando a Figura \ref{fig:Fig3M} obtemos os valores de $(\frac{E_{b}}{N_{0}})
 \begin{table}[H]
 	\centering
 	\captionsetup{font=scriptsize}
-	\captionof{table}{Valores de $(\frac{E_{b}}{N_{0}})$ para probabilidade de erro de $10^{-4}$\label{table:snrvalues2}}
+	\captionof{table}{Valores de $\left(\frac{E_{i}}{N_{0}}\right)$ para probabilidade de erro de $10^{-4}$\label{table:snrvalues2}}
 	\begin{tabular}{c|c}
 	\textbf{Código} & \textbf{$E_{i}/N_{0} (dB)$} \\ \hline
 	\textbf{Euclidean (m=6)} & 2.9 \\
